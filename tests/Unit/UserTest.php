@@ -28,4 +28,16 @@ class UserTest extends TestCase
                 'data' => UserRepository::RESPONSE_ARRAY,
             ]);
     }
+
+    public function testIndex()
+    {
+        $this->get(self::END_POINT)
+            ->dump()
+            ->assertOk()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => UserRepository::RESPONSE_ARRAY,
+                ],
+            ]);
+    }
 }

@@ -12,6 +12,52 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    /**
+        @OA\Get(
+            path="/users",
+            operationId="index",
+            tags={"User"},
+            summary="Get collection of Users",
+            description="Returns list of users",
+            @OA\Response(
+                response=200,
+                description="In a GET request, the response will contain an entity corresponding to the requested resource in this instance Bankaccount",
+                @OA\MediaType(
+                    mediaType="application/json",
+                    @OA\Property(
+                        property="data",
+                        type="array",
+                        @OA\Items(
+                            type="array",
+                            description="Successfully registered please confirm your email address.",
+                            @OA\Items(),
+                            example={"data":{}, "links":{"first":"/users?page=1","last":"/users?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"path":"/users","per_page":15,"to":null,"total":0}}
+                        )
+                    )
+                )
+            ),
+            @OA\Response(
+                response=404,
+                description="The requested resource could not be found but may be available in the future, or the route might be wrong. Subsequent requests by the client are permissible."
+            ),
+            @OA\Response(
+                response=405,
+                description="The resource method is not allowed. i.e post without payload",
+                @OA\MediaType(
+                    mediaType="application/json",
+                    @OA\Property(
+                        property="error",
+                        type="array",
+                        @OA\Items(),
+                        example="MethodNotAllowedHttpException"
+                    )
+                )
+            ),
+            security={{"bearer_token":{}}}
+            )
+
+        Returns list of users
+     */
     public function index()
     {
         return new UserCollection(User::paginate());
@@ -21,7 +67,7 @@ class UserController extends Controller
     @OA\Post(
     path="/users",
     operationId="store",
-    tags={"store"},
+    tags={"User"},
     summary="Register a new user on the system.",
     description="Creates user, then kicks off the registration process.",
     @OA\RequestBody(

@@ -6,3 +6,6 @@ curl -X POST -i 'http://0.0.0.0/api/users' --data '{
   "password": "ban3@Batman"
 }'
 
+## Get users
+
+curl -X GET -i 'http://0.0.0.0/api/users'
