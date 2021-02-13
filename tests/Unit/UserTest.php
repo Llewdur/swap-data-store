@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Unauthenticated;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -10,7 +9,7 @@ class UserTest extends TestCase
 {
     use WithFaker;
 
-    const END_POINT = '/api/users';
+    public const END_POINT = '/api/users';
 
     public function testStore()
     {
@@ -26,7 +25,7 @@ class UserTest extends TestCase
         ];
 
         $this->post(self::END_POINT, $dataArray, $headers)
-        ->dump()
+            ->dump()
             ->assertStatus(201)
             ->assertJsonStructure(['data']);
     }
