@@ -2,31 +2,30 @@
 
 namespace Tests\Feature\Unauthenticated;
 
+use App\Repository\Eloquent\UserRepository;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+    use WithoutMiddleware;
     use WithFaker;
 
     public const END_POINT = '/api/users';
 
     public function testStore()
     {
-        $headers = [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-        ];
-
         $dataArray = [
             'email' => $this->faker->unique()->safeEmail,
             'name' => $this->faker->name,
             'password' => '12345678',
         ];
 
-        $this->post(self::END_POINT, $dataArray, $headers)
-            ->dump()
-            ->assertStatus(201)
-            ->assertJsonStructure(['data']);
+        $this->postJson(self::END_POINT, $dataArray)
+            ->assertCreated()
+            ->assertJsonStructure([
+                'data' => UserRepository::RESPONSE_ARRAY,
+            ]);
     }
 }

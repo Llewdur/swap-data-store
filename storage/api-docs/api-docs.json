@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Simple User Data Store Swap Api",
+        "description": "Laravel based API using L5 Swagger for documentation",
+        "contact": {
+            "name": "Llewellyn",
+            "email": "llewellyn@zekini.com"
+        },
+        "version": "V0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://swap.testapi"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "store"
+                ],
+                "summary": "Register a new user on the system.",
+                "description": "Creates user, then kicks off the registration process.",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "Email address of the user",
+                                        "type": "email",
+                                        "example": "bane@gothamcity.com"
+                                    },
+                                    "name": {
+                                        "description": "The user's name",
+                                        "type": "string",
+                                        "example": "Llewellyn"
+                                    },
+                                    "password": {
+                                        "description": "Password of the user",
+                                        "type": "password",
+                                        "example": "ban3@Batman"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The request has been fulfilled, resulting in the creation of a new User resource.",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "304": {
+                        "description": "The resource has not been modified since the version specified by the request headers If-Modified-Since or If-None-Match. In such case, there is no need to retransmit the resource since the client still has a previously-downloaded copy.",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "oauth2",
+                "description": "Use a global client_id / client_secret and your username / password combo to obtain a token",
+                "in": "header",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "/oauth/authorize",
+                        "tokenUrl": "/oauth/token",
+                        "refreshUrl": "/oauth/token/refresh",
+                        "scopes": {}
+                    }
+                },
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
