@@ -2,12 +2,19 @@
 
 namespace App\Repository\Eloquent;
 
-class UserRepository extends BaseRepository
+use App\Models\User;
+use App\Repository\UserRepositoryInterface;
+use Illuminate\Support\Collection;
+
+class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
-    public const RESPONSE_ARRAY = [
-        'created_at',
-        'email',
-        'id',
-        'name',
-    ];
+    public function __construct(User $model)
+    {
+        parent::__construct($model);
+    }
+
+    public function all(): Collection
+    {
+        return $this->model->all();
+    }
 }

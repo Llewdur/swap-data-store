@@ -25,19 +25,26 @@ class UserTest extends TestCase
         $this->postJson(self::END_POINT, $dataArray)
             ->assertCreated()
             ->assertJsonStructure([
-                'data' => UserRepository::RESPONSE_ARRAY,
-            ]);
+                'created_at',
+                'email',
+                'id',
+                'name',
+            ])
+            ;
     }
 
     public function testIndex()
     {
         $this->get(self::END_POINT)
-            ->dump()
             ->assertOk()
             ->assertJsonStructure([
-                'data' => [
-                    '*' => UserRepository::RESPONSE_ARRAY,
-                ],
-            ]);
+                    '*' => [
+                        'created_at',
+                        'email',
+                        'id',
+                        'name',
+                    ]
+            ])
+            ;
     }
 }

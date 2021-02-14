@@ -62,7 +62,7 @@
                                     "email": {
                                         "description": "Email address of the user",
                                         "type": "email",
-                                        "example": "bane@gothamcity.com"
+                                        "example": "llewellyn@zekini.com"
                                     },
                                     "name": {
                                         "description": "The user's name",
