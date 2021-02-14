@@ -19,4 +19,4 @@ For Eloquent: Uncomment use App\Repository\Eloquent\UserRepository;
 ## Would normally have refactored
 app/Repository/Csv/UserRepository.php has hardcoded "users.txt"
 The validation only works against the MySQL implementation as it uses the model
-
+Removed middleware to ease testing
