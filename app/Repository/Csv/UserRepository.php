@@ -12,7 +12,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         $users = Storage::disk('local')->get('users.txt');
         $usersArray = explode(PHP_EOL, $users);
-        
+
         return collect($usersArray)
             ->map(function ($row) {
                 return json_decode($row, true);

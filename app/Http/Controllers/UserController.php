@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
 use App\Repository\UserRepositoryInterface;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -62,7 +63,7 @@ class UserController extends Controller
 
         Returns list of users
      */
-    public function index()
+    public function index(): Collection
     {
         return $this->userRepository->all();
     }
@@ -137,7 +138,7 @@ class UserController extends Controller
 
     Returns success message
      */
-    public function store(UserRequest $request)//: UserResource
+    public function store(UserRequest $request): JsonResponse
     {
         $request['password'] = Hash::make($request['password']);
 

@@ -14,6 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware(['auth:api'])->group(function () {
-    Route::apiResource('/users', 'App\Http\Controllers\UserController', ['only' => ['index', 'store']]);
-// });
+Route::apiResource('/users', 'App\Http\Controllers\UserController', ['only' => ['index', 'store']]);
